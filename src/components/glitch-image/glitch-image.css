@@ -1,0 +1,32 @@
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+}
+
+.base-image {
+  width: 100%;
+}
+
+.base-image.absolute {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.base-image.absolute.glitch {
+  filter: blur(2px) brightness(1);
+}
+
+.base-image.absolute.glitch.red {
+  transform: translateX(5px);
+  filter: blur(2px) hue-rotate(310deg);
+}
+
+.base-image.absolute.glitch.blue {
+  transform: translateX(-5px);
+  filter: blur(2px) hue-rotate(230deg);
+}
