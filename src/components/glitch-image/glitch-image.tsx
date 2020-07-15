@@ -121,42 +121,30 @@ export class GlitchImage {
   render() {
     if (this.glitchWidth) {
       const baseStyle = [...Array(this.glitchCount + 1)].map((_, i) => {
-        switch (true) {
-          case i === 0: {
-            return {
-              clipPath: `polygon(0% 0%, 100% 0%, 100% ${this.glitchTop[i]}%, 0% ${this.glitchTop[i]}%)`,
-            };
-          }
-          case i === this.glitchCount: {
-            return {
-              clipPath: `polygon(0% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% 100%, 0% 100%)`,
-            };
-          }
-          default: {
-            // middle part
-            return {
-              clipPath: `polygon(0% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% ${this.glitchTop[i]}%, 0% ${this.glitchTop[i]}%)`,
-            };
-          }
-        }
+        const clip12 =
+          i > 0 ? this.glitchTop[i - 1] + this.glitchWidth[i - 1] : 0;
+        const clip34 = i < this.glitchCount ? this.glitchTop[i] : 100;
+
+        return {
+          "--gi-clip-1": `${clip12}%`,
+          "--gi-clip-2": `${clip12}%`,
+          "--gi-clip-3": `${clip34}%`,
+          "--gi-clip-4": `${clip34}%`,
+        };
       });
 
-      const glitchStyle = [...Array(this.glitchCount)].map((_, i) => ({
-        clipPath: `polygon(0% ${this.glitchTop[i]}%, 100% ${
-          this.glitchTop[i]
-        }%, 100% ${this.glitchTop[i] + this.glitchWidth[i]}%, 0% ${
-          this.glitchTop[i] + this.glitchWidth[i]
-        }%)`,
-        left: `${this.glitchLeft[i]}px`,
-      }));
+      const glitchStyle = [...Array(this.glitchCount)].map((_, i) => {
+        const clip12 = this.glitchTop[i];
+        const clip34 = this.glitchTop[i - 1] + this.glitchWidth[i - 1];
+
+        return {
+          "--gi-clip-1": `${clip12}%`,
+          "--gi-clip-2": `${clip12}%`,
+          "--gi-clip-3": `${clip34}%`,
+          "--gi-clip-4": `${clip34}%`,
+          left: `${this.glitchLeft[i]}px`,
+        };
+      });
 
       return (
         <div class="container">
