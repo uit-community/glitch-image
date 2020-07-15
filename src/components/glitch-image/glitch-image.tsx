@@ -18,7 +18,7 @@ const MAX_GLITCH_LEFT = 20;
 export class GlitchImage {
   @Prop() src: string = "";
 
-  @State() isEnable: boolean = false;
+  @State() isEnabled: boolean = false;
   @State() glitchCount: number = 1;
   @State() glitchSequenceCount: number = 1;
   @State() glitchWidth: number[] = [];
@@ -27,7 +27,7 @@ export class GlitchImage {
 
   componentWillLoad() {
     this.clearGlitch();
-    this.isEnable = true;
+    this.isEnabled = true;
 
     setTimeout(() => {
       this.startGlitch();
@@ -35,11 +35,11 @@ export class GlitchImage {
   }
 
   disconnectedCallback() {
-    this.isEnable = false;
+    this.isEnabled = false;
   }
 
   startGlitch() {
-    if (!this.isEnable) {
+    if (!this.isEnabled) {
       return;
     }
     const glitchWaitTime: number[] = [];
