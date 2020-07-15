@@ -122,8 +122,10 @@ export class GlitchImage {
     if (this.glitchWidth) {
       const baseStyle = [...Array(this.glitchCount + 1)].map((_, i) => {
         const clip12 =
-          i > 0 ? this.glitchTop[i - 1] + this.glitchWidth[i - 1] : 0;
-        const clip34 = i < this.glitchCount ? this.glitchTop[i] : 100;
+          i > 0 && i <= this.glitchTop.length
+            ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
+            : 0;
+        const clip34 = i < this.glitchTop.length ? this.glitchTop[i] : 100;
 
         return {
           "--gi-clip-1": `${clip12}%`,
@@ -134,8 +136,11 @@ export class GlitchImage {
       });
 
       const glitchStyle = [...Array(this.glitchCount)].map((_, i) => {
-        const clip12 = this.glitchTop[i];
-        const clip34 = this.glitchTop[i - 1] + this.glitchWidth[i - 1];
+        const clip12 = this.glitchTop[i] ?? 0;
+        const clip34 =
+          i > 0 && i <= this.glitchTop.length
+            ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
+            : 100;
 
         return {
           "--gi-clip-1": `${clip12}%`,
