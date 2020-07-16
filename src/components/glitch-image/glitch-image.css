@@ -10,10 +10,10 @@
 .base-image {
   width: 100%;
   clip-path: polygon(
-    0% var(--gi-clip-1, 0%),
-    100% var(--gi-clip-2, 0%),
-    100% var(--gi-clip-3, 100%),
-    0% var(--gi-clip-4, 100%)
+    0% var(--gi-clip-top, 0%),
+    100% var(--gi-clip-top, 0%),
+    100% var(--gi-clip-bottom, 100%),
+    0% var(--gi-clip-bottom, 100%)
   );
 }
 

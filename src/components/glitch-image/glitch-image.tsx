@@ -121,32 +121,28 @@ export class GlitchImage {
   render() {
     if (this.glitchWidth) {
       const baseStyle = [...Array(this.glitchCount + 1)].map((_, i) => {
-        const clip12 =
+        const clipTop =
           i > 0 && i <= this.glitchTop.length
             ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
             : 0;
-        const clip34 = i < this.glitchTop.length ? this.glitchTop[i] : 100;
+        const clipBottom = i < this.glitchTop.length ? this.glitchTop[i] : 100;
 
         return {
-          "--gi-clip-1": `${clip12}%`,
-          "--gi-clip-2": `${clip12}%`,
-          "--gi-clip-3": `${clip34}%`,
-          "--gi-clip-4": `${clip34}%`,
+          "--gi-clip-top": `${clipTop}%`,
+          "--gi-clip-bottom": `${clipBottom}%`,
         };
       });
 
       const glitchStyle = [...Array(this.glitchCount)].map((_, i) => {
-        const clip12 = this.glitchTop[i] ?? 0;
-        const clip34 =
+        const clipTop = this.glitchTop[i] ?? 0;
+        const clipBottom =
           i > 0 && i <= this.glitchTop.length
             ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
             : 100;
 
         return {
-          "--gi-clip-1": `${clip12}%`,
-          "--gi-clip-2": `${clip12}%`,
-          "--gi-clip-3": `${clip34}%`,
-          "--gi-clip-4": `${clip34}%`,
+          "--gi-clip-top": `${clipTop}%`,
+          "--gi-clip-bottom": `${clipBottom}%`,
           left: `${this.glitchLeft[i]}px`,
         };
       });
