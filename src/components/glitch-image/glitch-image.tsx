@@ -18,7 +18,7 @@ const MAX_GLITCH_LEFT = 20;
 export class GlitchImage {
   @Prop() src: string = "";
 
-  @State() isEnable: boolean = false;
+  @State() isEnabled: boolean = false;
   @State() glitchCount: number = 1;
   @State() glitchSequenceCount: number = 1;
   @State() glitchWidth: number[] = [];
@@ -27,7 +27,7 @@ export class GlitchImage {
 
   componentWillLoad() {
     this.clearGlitch();
-    this.isEnable = true;
+    this.isEnabled = true;
 
     setTimeout(() => {
       this.startGlitch();
@@ -35,11 +35,11 @@ export class GlitchImage {
   }
 
   disconnectedCallback() {
-    this.isEnable = false;
+    this.isEnabled = false;
   }
 
   startGlitch() {
-    if (!this.isEnable) {
+    if (!this.isEnabled) {
       return;
     }
     const glitchWaitTime: number[] = [];
@@ -121,42 +121,31 @@ export class GlitchImage {
   render() {
     if (this.glitchWidth) {
       const baseStyle = [...Array(this.glitchCount + 1)].map((_, i) => {
-        switch (true) {
-          case i === 0: {
-            return {
-              clipPath: `polygon(0% 0%, 100% 0%, 100% ${this.glitchTop[i]}%, 0% ${this.glitchTop[i]}%)`,
-            };
-          }
-          case i === this.glitchCount: {
-            return {
-              clipPath: `polygon(0% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% 100%, 0% 100%)`,
-            };
-          }
-          default: {
-            // middle part
-            return {
-              clipPath: `polygon(0% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% ${
-                this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-              }%, 100% ${this.glitchTop[i]}%, 0% ${this.glitchTop[i]}%)`,
-            };
-          }
-        }
+        const clipTop =
+          i > 0 && i <= this.glitchTop.length
+            ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
+            : 0;
+        const clipBottom = i < this.glitchTop.length ? this.glitchTop[i] : 100;
+
+        return {
+          "--gi-clip-top": `${clipTop}%`,
+          "--gi-clip-bottom": `${clipBottom}%`,
+        };
       });
 
-      const glitchStyle = [...Array(this.glitchCount)].map((_, i) => ({
-        clipPath: `polygon(0% ${this.glitchTop[i]}%, 100% ${
-          this.glitchTop[i]
-        }%, 100% ${this.glitchTop[i] + this.glitchWidth[i]}%, 0% ${
-          this.glitchTop[i] + this.glitchWidth[i]
-        }%)`,
-        left: `${this.glitchLeft[i]}px`,
-      }));
+      const glitchStyle = [...Array(this.glitchCount)].map((_, i) => {
+        const clipTop = this.glitchTop[i] ?? 0;
+        const clipBottom =
+          i > 0 && i <= this.glitchTop.length
+            ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
+            : 100;
+
+        return {
+          "--gi-clip-top": `${clipTop}%`,
+          "--gi-clip-bottom": `${clipBottom}%`,
+          left: `${this.glitchLeft[i]}px`,
+        };
+      });
 
       return (
         <div class="container">
