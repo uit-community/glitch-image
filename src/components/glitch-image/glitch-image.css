@@ -1,14 +1,17 @@
 :host {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 }
 
 .container {
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .base-image {
   width: 100%;
+  height: 100%;
   clip-path: polygon(
     0% var(--gi-clip-top, 0%),
     100% var(--gi-clip-top, 0%),
