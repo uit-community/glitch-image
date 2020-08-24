@@ -27,15 +27,15 @@
 }
 
 .base-image.absolute.glitch {
-  filter: blur(2px) brightness(1);
+  filter: blur(1px) brightness(1.1);
 }
 
 .base-image.absolute.glitch.red {
   transform: translateX(5px);
-  filter: blur(2px) hue-rotate(310deg);
+  filter: blur(1px) hue-rotate(310deg);
 }
 
 .base-image.absolute.glitch.blue {
   transform: translateX(-5px);
-  filter: blur(2px) hue-rotate(230deg);
+  filter: blur(1px) hue-rotate(230deg);
 }

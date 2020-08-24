@@ -1,5 +1,6 @@
 import { Component, h, State, Prop } from "@stencil/core";
 import classnames from "classnames";
+import { pickRandomFromRange } from "../../utils/utils";
 
 const INITIAL_WAIT_TIME = 1000;
 const CLEAR_TIME = 100;
@@ -52,12 +53,7 @@ export class GlitchImage {
       glitchWaitTime[i] = Math.random() * (100 * delaySeed) + 100;
 
       setTimeout(() => {
-        const { glitchWidth, glitchTop, glitchLeft } = this.makeGlitch();
-        this.setGlitch({
-          glitchWidth,
-          glitchTop: glitchTop.sort(),
-          glitchLeft,
-        });
+        this.setGlitch(this.makeGlitch());
       }, glitchWaitTime[i]);
     }
 
@@ -80,8 +76,11 @@ export class GlitchImage {
 
     for (let i = 0; i < this.glitchCount; i++) {
       glitchWidth[i] = Math.random() * MAX_GLITCH_WIDTH + OFFSET_GLITCH_WIDTH;
-      glitchTop[i] =
-        Math.random() * (100 - MAX_GLITCH_WIDTH + OFFSET_GLITCH_WIDTH);
+      glitchTop[i] = pickRandomFromRange(
+        i === 0 ? 0 : glitchTop[i - 1] + glitchWidth[i - 1],
+        100 - (MAX_GLITCH_WIDTH + OFFSET_GLITCH_WIDTH)
+      );
+      Math.random() * (100 - MAX_GLITCH_WIDTH + OFFSET_GLITCH_WIDTH);
       glitchLeft[i] = Math.random() * (2 * MAX_GLITCH_LEFT) - MAX_GLITCH_LEFT;
     }
 
@@ -119,10 +118,11 @@ export class GlitchImage {
   }
 
   render() {
+    console.log("glitchCount", this.glitchCount);
     if (this.glitchWidth) {
       const baseStyle = [...Array(this.glitchCount + 1)].map((_, i) => {
         const clipTop =
-          i > 0 && i <= this.glitchTop.length
+          0 < i && i <= this.glitchTop.length
             ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
             : 0;
         const clipBottom = i < this.glitchTop.length ? this.glitchTop[i] : 100;
@@ -134,11 +134,8 @@ export class GlitchImage {
       });
 
       const glitchStyle = [...Array(this.glitchCount)].map((_, i) => {
-        const clipTop = this.glitchTop[i] ?? 0;
-        const clipBottom =
-          i > 0 && i <= this.glitchTop.length
-            ? this.glitchTop[i - 1] + this.glitchWidth[i - 1]
-            : 100;
+        const clipTop = this.glitchTop[i];
+        const clipBottom = this.glitchTop[i] + this.glitchWidth[i];
 
         return {
           "--gi-clip-top": `${clipTop}%`,
