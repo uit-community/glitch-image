@@ -1,7 +1,7 @@
 {
   "name": "@uit/glitch-image",
   "private": false,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A component that can be used like a <img> tag to create cool effects.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
