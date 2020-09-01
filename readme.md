@@ -8,7 +8,7 @@ It's easy to use, just put the file path to the image in the src attribute, like
 
 ```
 <script
-  src="TODO: Set the URL of the uploaded module"
+  src="https://unpkg.com/@uit/glitch-image/dist/glitch-image.js"
   type="module"
 ></script>
 
@@ -22,23 +22,23 @@ It's easy to use, just put the file path to the image in the src attribute, like
 The glitch effect is an expressive technique that creates a situation where a digital device is unable to display the correct image due to noise or error.  
 So, it is not like a static error, but rather a partial error in phase/hue.
 
-## [WIP] Using this component
+## Using this component
 
 ### Script tag
 
-- Put a script tag similar to this `<script src='https://unpkg.com/{TODO}/dist/mycomponent.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/@uit/glitch-image/dist/glitch-image.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules
 
-- Run `npm install {TODO} --save`
-- Put a script tag similar to this `<script src='node_modules/{TODO}/dist/mycomponent.js'></script>` in the head of your index.html
+- Run `npm install @uit/glitch-image --save`
+- Put a script tag similar to this `<script src='node_modules/@uit/glitch-image/dist/glitch-image.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### In a stencil-starter app
 
-- Run `npm install {TODO} --save`
-- Add an import to the npm packages `import {TODO};`
+- Run `npm install @uit/glitch-image --save`
+- Add an import to the npm packages `import @uit/glitch-image;`
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ## Getting Started
@@ -69,5 +69,3 @@ To run the unit tests for the components, run:
 ```bash
 npm test
 ```
-
-Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
