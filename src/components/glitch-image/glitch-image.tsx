@@ -118,7 +118,6 @@ export class GlitchImage {
   }
 
   render() {
-    console.log("glitchCount", this.glitchCount);
     if (this.glitchWidth) {
       const baseStyle = [...Array(this.glitchCount + 1)].map((_, i) => {
         const clipTop =
