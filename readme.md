@@ -29,6 +29,52 @@ So, it is not like a static error, but rather a partial error in phase/hue.
 - Put a script tag similar to this `<script src='https://unpkg.com/@uit/glitch-image/dist/glitch-image.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
+### React
+
+- Run `npm install @uit/glitch-image --save`
+- Then, implement it by calling the loader as follows
+
+```
+import { applyPolyfills, defineCustomElements } from "@uit/glitch-image/loader";
+
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
+
+export default function App() {
+  return (
+    <div className="App">
+      <glitch-image src="..." />
+    </div>
+  );
+}
+```
+
+### Vue
+
+- Run `npm install @uit/glitch-image --save`
+- Then, implement it by calling the loader as follows
+
+```
+<template>
+  <div id="app">
+    <glitch-image src="..." />
+  </div>
+</template>
+
+<script>
+import { applyPolyfills, defineCustomElements } from "@uit/glitch-image/loader";
+
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
+
+export default {
+  name: "App"
+};
+</script>
+```
+
 ### Node Modules
 
 - Run `npm install @uit/glitch-image --save`
