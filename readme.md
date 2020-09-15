@@ -6,7 +6,7 @@
 
 It's easy to use, just put the file path to the image in the src attribute, like the <img> tag.
 
-```
+```html
 <script
   src="https://unpkg.com/@uit/glitch-image/dist/glitch-image.js"
   type="module"
@@ -34,7 +34,7 @@ So, it is not like a static error, but rather a partial error in phase/hue.
 - Run `npm install @uit/glitch-image --save`
 - Then, implement it by calling the loader as follows
 
-```
+```javascript
 import { applyPolyfills, defineCustomElements } from "@uit/glitch-image/loader";
 
 applyPolyfills().then(() => {
@@ -55,7 +55,7 @@ export default function App() {
 - Run `npm install @uit/glitch-image --save`
 - Then, implement it by calling the loader as follows
 
-```
+```vue
 <template>
   <div id="app">
     <glitch-image src="..." />
