@@ -15,6 +15,7 @@
     "dist/",
     "loader/"
   ],
+  "homepage": "https://github.com/uit-community/glitch-image",
   "scripts": {
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
