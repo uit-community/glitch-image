@@ -4,7 +4,7 @@ import { pickRandomFromRange } from "../../utils/utils";
 
 const INITIAL_WAIT_TIME = 1000;
 const CLEAR_TIME = 100;
-const MAX_GLITCH_COUNT = 4;
+const MAX_GLITCH_COUNT = 1;
 const MAX_GLITCH_SEQUENCE_COUNT = 3;
 const MAX_GLITCH_FREQUENCY_MS = 2000;
 const MAX_GLITCH_WIDTH = 5;
